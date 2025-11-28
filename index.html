@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Avaliação de Candidato: Pedro - Live Consultoria</title>
+    
+    <!-- Fontes -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css?family=Merriweather:ital,wght@0,400;1,700&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <style>
+        /* 1. NÚCLEO DA IDENTIDADE VISUAL (TOKENS) */
+        :root {
+            /* Paleta Principal */
+            --primary-bg: #06192a;
+            --card-bg: #0A243D;
+            --accent-color: #00e800;
+            
+            /* Textos - GARANTIA DE CONTRASTE */
+            --text-primary: #ffffff;
+            --text-muted: #e0e0e0; /* Clareado para melhor leitura */
+            --text-subtle: #b0b0b0;
+            
+            /* Bordas e Efeitos */
+            --border-color: rgba(255, 255, 255, 0.15);
+            --accent-glow: 0 0 10px rgba(0, 232, 0, 0.5);
+            
+            /* Tipografia */
+            --font-primary: 'Poppins', sans-serif;
+            --font-secondary: 'Merriweather', serif;
+            
+            /* Tamanhos de Fonte */
+            --font-size-base: 1.1rem;
+            --font-size-h3: 1.5rem;
+            --font-size-h2: clamp(1.8rem, 3vw, 2.5rem);
+            --font-size-h1: clamp(2.2rem, 4vw, 3.5rem);
+            
+            /* Espaçamento */
+            --space-sm: 1rem;
+            --space-md: 2rem;
+            --space-lg: 4rem;
+            --space-xl: 6rem;
+        }
+
+        /* 2. RESET E ESTRUTURA BÁSICA */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--primary-bg);
+            /* Fallback seguro se a imagem não carregar */
+            background-image: linear-gradient(rgba(6, 25, 42, 0.9), rgba(6, 25, 42, 0.9)), url('https://www.transparenttextures.com/patterns/cubes.png');
+            background-attachment: fixed;
+            color: var(--text-primary);
+            font-family: var(--font-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* 3. LAYOUT */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 15px 5%;
+            background: rgba(6, 25, 42, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+        }
+
+        header img {
+            height: 35px;
+        }
+
+        main {
+            padding-top: 120px; /* Espaço para o header fixo */
+            padding-bottom: var(--space-xl);
+            width: 90%;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        section {
+            margin-bottom: var(--space-xl);
+            opacity: 0; /* Para animação fade-in */
+            animation: fadeIn 0.8s ease-out forwards;
+        }
+        
+        /* Stagger animation delays for sections */
+        section:nth-child(1) { animation-delay: 0.1s; }
+        section:nth-child(2) { animation-delay: 0.2s; }
+        section:nth-child(3) { animation-delay: 0.3s; }
+        section:nth-child(4) { animation-delay: 0.4s; }
+        section:nth-child(5) { animation-delay: 0.5s; }
+
+        footer {
+            background-color: var(--card-bg);
+            padding: var(--space-lg) 5%;
+            text-align: center;
+            border-top: 1px solid var(--border-color);
+        }
+
+        /* 4. COMPONENTES */
+        
+        /* Títulos */
+        h1, h2, h3 {
+            color: var(--text-primary);
+            margin-bottom: var(--space-sm);
+            font-weight: 700;
+        }
+
+        h1 { font-size: var(--font-size-h1); line-height: 1.2; }
+        h2 { font-size: var(--font-size-h2); color: var(--accent-color); margin-bottom: var(--space-md); }
+        h3 { font-size: var(--font-size-h3); }
+
+        /* Card Padrão */
+        .card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: var(--space-md);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Destaque "Quote" (Para o Fabrício) */
+        .quote-box {
+            background: rgba(0, 232, 0, 0.05);
+            border-left: 4px solid var(--accent-color);
+            padding: 20px;
+            margin-top: 20px;
+            border-radius: 0 12px 12px 0;
+            font-family: var(--font-secondary);
+            font-style: italic;
+            color: var(--text-primary);
+        }
+        
+        .quote-author {
+            display: block;
+            margin-top: 10px;
+            font-family: var(--font-primary);
+            font-style: normal;
+            font-weight: 600;
+            color: var(--accent-color);
+            font-size: 0.9rem;
+        }
+
+        /* Grids */
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: var(--space-md);
+        }
+
+        @media (min-width: 768px) {
+            .grid-2 {
+                grid-template-columns: 1fr 1fr;
+                align-items: center;
+            }
+        }
+
+        /* Skill Bars (Avaliação) */
+        .skill-container {
+            margin-top: 10px;
+        }
+        
+        .skill-row {
+            margin-bottom: 20px;
+        }
+        
+        .skill-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+            font-size: 1rem;
+            font-weight: 500;
+        }
+
+        .skill-bar-bg {
+            background-color: rgba(255, 255, 255, 0.1);
+            height: 8px;
+            border-radius: 4px;
+            width: 100%;
+        }
+
+        .skill-bar-fill {
+            background-color: var(--accent-color);
+            height: 100%;
+            border-radius: 4px;
+            box-shadow: 0 0 10px rgba(0, 232, 0, 0.3);
+            width: 0; /* JS vai animar */
+            transition: width 1.2s ease-out;
+        }
+
+        /* Timeline Vertical */
+        .timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px 0;
+        }
+
+        .timeline::after {
+            content: '';
+            position: absolute;
+            width: 2px;
+            background-color: var(--border-color);
+            top: 0;
+            bottom: 0;
+            left: 20px;
+        }
+
+        @media (min-width: 768px) {
+            .timeline::after {
+                left: 50%;
+                margin-left: -1px;
+            }
+        }
+
+        .timeline-item {
+            padding: 10px 40px;
+            position: relative;
+            background-color: inherit;
+            width: 100%;
+            margin-bottom: 30px;
+        }
+
+        @media (min-width: 768px) {
+            .timeline-item {
+                width: 50%;
+            }
+            .left {
+                left: 0;
+                text-align: right;
+                padding-right: 40px;
+                padding-left: 0;
+            }
+            .right {
+                left: 50%;
+                text-align: left;
+                padding-left: 40px;
+            }
+        }
+
+        .timeline-content {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 20px;
+            position: relative;
+            z-index: 10;
+        }
+        
+        .timeline-content h3 {
+            color: var(--accent-color);
+            font-size: 1.2rem;
+            margin-bottom: 5px;
+        }
+
+        /* Marcador (Dot) */
+        .timeline-dot {
+            position: absolute;
+            width: 16px;
+            height: 16px;
+            background-color: var(--accent-color);
+            border: 4px solid var(--primary-bg);
+            border-radius: 50%;
+            top: 25px;
+            z-index: 20;
+            box-shadow: 0 0 10px rgba(0, 232, 0, 0.5);
+        }
+
+        @media (max-width: 767px) {
+            .timeline-dot {
+                left: 13px;
+            }
+        }
+
+        @media (min-width: 768px) {
+            .left .timeline-dot {
+                right: -50px; /* Ajuste fino */
+            }
+            .right .timeline-dot {
+                left: -8px;
+            }
+            /* Correção da posição dos dots no desktop */
+            .timeline-dot {
+                 left: 50%;
+                 margin-left: -8px;
+            }
+        }
+
+        /* Botão WhatsApp */
+        .btn-whatsapp {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            background-color: #25D366;
+            color: #fff;
+            padding: 18px 40px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            margin-top: var(--space-md);
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .btn-whatsapp:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(37, 211, 102, 0.5);
+            background-color: #20bd5a;
+        }
+
+        /* Animações */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Utilitários */
+        .text-accent { color: var(--accent-color); }
+        .text-muted { color: var(--text-muted); }
+        .text-center { text-align: center; }
+        .icon-lg { font-size: 2.5rem; color: var(--accent-color); margin-bottom: 15px; }
+
+    </style>
+</head>
+<body>
+
+    <!-- CABEÇALHO -->
+    <header>
+        <div class="logo">
+            <img src="https://raw.githubusercontent.com/Clebito2/layout/main/Logo%20live%20oficial-36.png" alt="Logo Live Consultoria">
+        </div>
+        <div style="font-size: 0.9rem; color: var(--text-subtle); font-weight: 600;">
+            PROJETO CASA GOIANITA
+        </div>
+    </header>
+
+    <main>
+        <!-- 1. HERO SECTION -->
+        <section id="hero" class="text-center">
+            <p style="color: var(--accent-color); font-weight: 700; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 10px;">Relatório de Candidato</p>
+            <h1>Avaliação Estratégica:<br>Pedro (Vendas)</h1>
+            <p style="font-size: 1.2rem; color: var(--text-muted); max-width: 700px; margin: 20px auto 0;">
+                Diagnóstico retificado após entrevista qualitativa e verificação de referências. O candidato apresenta <strong>alto potencial técnico e comportamental</strong>.
+            </p>
+        </section>
+
+        <!-- 2. REFERÊNCIA E PROVA SOCIAL (NOVO) -->
+        <section id="referencias">
+            <div class="card">
+                <div class="grid-2">
+                    <div>
+                        <h3><i class="fa-solid fa-star text-accent"></i> Validação de Referência</h3>
+                        <p class="text-muted">
+                            Entramos em contato com a gestão anterior para validar o histórico do candidato, focando em mitigar o risco de instabilidade.
+                        </p>
+                        
+                        <div class="quote-box">
+                            <i class="fa-solid fa-quote-left text-accent" style="font-size: 1.5rem; margin-bottom: 10px;"></i><br>
+                            "O Pedro sempre foi muito pontual e um bom vendedor. Nunca tive problemas com ele em relação a entregas ou comportamento."
+                            <span class="quote-author">— Fabrício (Antigo Gerente)</span>
+                        </div>
+                    </div>
+                    <div style="background: rgba(255,255,255,0.03); border-radius: 12px; padding: 30px; display: flex; flex-direction: column; justify-content: center; height: 100%;">
+                        <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 20px;">
+                            <i class="fa-solid fa-check-circle text-accent" style="font-size: 1.5rem;"></i>
+                            <div>
+                                <strong style="display: block; color: #fff;">Pontualidade</strong>
+                                <span style="font-size: 0.9rem; color: var(--text-subtle);">Confirmada pelo gestor</span>
+                            </div>
+                        </div>
+                        <div style="display: flex; align-items: center; gap: 15px;">
+                            <i class="fa-solid fa-chart-line text-accent" style="font-size: 1.5rem;"></i>
+                            <div>
+                                <strong style="display: block; color: #fff;">Performance de Vendas</strong>
+                                <span style="font-size: 0.9rem; color: var(--text-subtle);">Classificado como "Bom Vendedor"</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. PERFIL PROFISSIONAL -->
+        <section id="perfil">
+            <h2>Perfil Técnico & Comportamental</h2>
+            <div class="grid-2">
+                <!-- Card Esquerda: Hard Skills -->
+                <div class="card">
+                    <i class="fa-solid fa-briefcase icon-lg"></i>
+                    <h3>Experiência Sólida</h3>
+                    <ul style="color: var(--text-muted); margin-top: 15px;">
+                        <li style="margin-bottom: 12px;"><i class="fa-solid fa-check text-accent"></i> <strong>4 Anos de Renner:</strong> Vivência em varejo estruturado, com metas de produtos financeiros (cartão/seguro).</li>
+                        <li style="margin-bottom: 12px;"><i class="fa-solid fa-check text-accent"></i> <strong>Claro:</strong> Experiência com tecnologia e planos de serviço.</li>
+                        <li><i class="fa-solid fa-check text-accent"></i> <strong>Comissário de Bordo:</strong> Formação em excelência de atendimento, postura e protocolos.</li>
+                    </ul>
+                </div>
+
+                <!-- Card Direita: Soft Skills (Gráfico) -->
+                <div class="card">
+                    <i class="fa-solid fa-brain icon-lg"></i>
+                    <h3>Competências Chave</h3>
+                    
+                    <div class="skill-container">
+                        <div class="skill-row">
+                            <div class="skill-header">
+                                <span>Resiliência (Pós-Assédio)</span>
+                                <span class="text-accent">5.0</span>
+                            </div>
+                            <div class="skill-bar-bg"><div class="skill-bar-fill" style="width: 100%;"></div></div>
+                        </div>
+
+                        <div class="skill-row">
+                            <div class="skill-header">
+                                <span>Ética e Transparência</span>
+                                <span class="text-accent">5.0</span>
+                            </div>
+                            <div class="skill-bar-bg"><div class="skill-bar-fill" style="width: 100%;"></div></div>
+                        </div>
+
+                        <div class="skill-row">
+                            <div class="skill-header">
+                                <span>Alinhamento Cultural</span>
+                                <span class="text-accent">4.8</span>
+                            </div>
+                            <div class="skill-bar-bg"><div class="skill-bar-fill" style="width: 96%;"></div></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. DIAGNÓSTICO ESTRATÉGICO -->
+        <section id="diagnostico">
+            <h2>Análise de Contexto (Correção)</h2>
+            <div class="card card-diagnostico" style="border-left: 4px solid var(--accent-color);">
+                <div class="grid-2">
+                    <div>
+                        <h3 style="margin-bottom: 10px;">Instabilidade vs. Realidade</h3>
+                        <p style="font-family: var(--font-secondary); color: var(--text-muted); font-size: 1.05rem;">
+                            A nota inicial de instabilidade foi revista e <strong>anulada</strong>. A saída da experiência anterior (8 meses) foi motivada por um ambiente tóxico comprovado (assédio moral/homofobia), configurando justa causa moral. O histórico de 4 anos na Renner e a validação do gerente Fabrício comprovam a estabilidade real do candidato.
+                        </p>
+                    </div>
+                    <div style="border: 1px solid rgba(255, 107, 107, 0.3); background: rgba(255, 107, 107, 0.05); padding: 20px; border-radius: 8px;">
+                        <h4 style="color: #ff6b6b; margin-bottom: 10px;"><i class="fa-solid fa-triangle-exclamation"></i> Risco de Compliance (Interno)</h4>
+                        <p style="color: #ffcccc; font-size: 0.95rem;">
+                            <strong>Atenção:</strong> A colaboradora citada como fonte do assédio (Maria, Veterana) ainda faz parte do quadro. A reintegração do candidato exige saneamento prévio do ambiente.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5. PRÓXIMOS PASSOS -->
+        <section id="roadmap">
+            <h2 class="text-center" style="margin-bottom: 40px;">Plano de Ação</h2>
+            
+            <div class="timeline">
+                
+                <!-- Passo 1 -->
+                <div class="timeline-item left">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <h3>1. Investigação Compliance</h3>
+                        <p class="text-muted">Ação Imediata</p>
+                        <p style="margin-top: 10px; font-size: 0.95rem;">
+                            Apuração interna sobre a conduta da colaboradora veterana e reforço da cultura de respeito.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Passo 2 -->
+                <div class="timeline-item right">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <h3>2. Oferta Estratégica</h3>
+                        <p class="text-muted">Em 24h</p>
+                        <p style="margin-top: 10px; font-size: 0.95rem;">
+                            Formalizar proposta para setor de <strong>Listas de Casamento</strong> ou <strong>Caixa Líder</strong>, aproveitando o perfil consultivo.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Passo 3 -->
+                <div class="timeline-item left">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <h3>3. Onboarding Técnico</h3>
+                        <p class="text-muted">Semana 1</p>
+                        <p style="margin-top: 10px; font-size: 0.95rem;">
+                            Treinamento focado em fechamento de vendas (gap do role play) e sistema ERP.
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+            
+            <div class="text-center mt-4">
+                <a href="https://wa.me/5561996993134" class="btn-whatsapp" target="_blank">
+                    <i class="fa-brands fa-whatsapp"></i> APROVAR CONTRATAÇÃO
+                </a>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- RODAPÉ -->
+    <footer>
+        <img src="https://raw.githubusercontent.com/Clebito2/layout/main/Logo%20live%20oficial-34.png" alt="Logo Live Consultoria Rodapé">
+        <p style="color: var(--text-subtle); font-size: 0.9rem; margin-top: 20px;">
+            &copy; 2025 Live Consultoria. Documento Confidencial.<br>
+            Brasília - DF
+        </p>
+    </footer>
+
+    <!-- SCRIPTS -->
+    <script>
+        // Animação de Entrada e Barras de Progresso
+        const observerOptions = {
+            threshold: 0.2
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    // Animação das barras de skill
+                    if (entry.target.id === 'perfil') {
+                        const bars = entry.target.querySelectorAll('.skill-bar-fill');
+                        bars.forEach(bar => {
+                            const width = bar.style.width;
+                            bar.style.width = '0'; // Reset para animar
+                            setTimeout(() => {
+                                bar.style.width = width;
+                            }, 100);
+                        });
+                    }
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('section').forEach(section => {
+            observer.observe(section);
+        });
+    </script>
+</body>
+</html>
