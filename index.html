@@ -67,9 +67,12 @@
 
         body {
             background-color: var(--primary-bg);
-            /* Textura de cubos (mais limpa) */
-            background-image: linear-gradient(rgba(6, 25, 42, 0.94), rgba(6, 25, 42, 0.97)), url('https://www.transparenttextures.com/patterns/cubes.png');
+            
+            /* TEXTURA APLICADA: FIBRA DE CARBONO + GRADIENTE SUAVE */
+            /* Isso garante elegância e contraste perfeito */
+            background-image: linear-gradient(rgba(6, 25, 42, 0.93), rgba(6, 25, 42, 0.96)), url('https://www.transparenttextures.com/patterns/carbon-fibre.png');
             background-attachment: fixed;
+            
             color: var(--text-primary);
             font-family: var(--font-primary);
             font-size: 16px; /* Base para rem */
@@ -277,7 +280,7 @@
         }
 
         /* =========================================
-           8. COMPONENTE: TIMELINE ANIMADA (CORRIGIDA)
+           8. COMPONENTE: TIMELINE ANIMADA
            ========================================= */
         .timeline {
             position: relative;
@@ -340,7 +343,7 @@
             margin-bottom: 5px;
         }
 
-        /* --- CORREÇÃO DE POSICIONAMENTO DESKTOP --- */
+        /* Responsividade e Ajuste da Bolinha (Desktop) */
         @media (min-width: 768px) {
             .timeline::after { left: 50%; margin-left: -1px; }
             
@@ -352,20 +355,19 @@
             .timeline-item.left.in-view, 
             .timeline-item.right.in-view { transform: translateX(0); }
 
-            /* AQUI ESTÁ A CORREÇÃO DA BOLINHA */
             /* Zera a configuração mobile */
             .timeline-dot {
                 left: auto;
                 margin-left: 0;
             }
 
-            /* Item da Esquerda: Bolinha vai para a direita extrema (+ ajuste do centro) */
+            /* Item da Esquerda: Bolinha vai para a direita extrema */
             .timeline-item.left .timeline-dot {
-                right: -12px; /* 10px metade da bolinha + 2px ajuste da linha */
-                left: auto;   /* Força anulação */
+                right: -12px; /* 10px metade + 2px ajuste */
+                left: auto;   
             }
 
-            /* Item da Direita: Bolinha vai para a esquerda extrema (+ ajuste do centro) */
+            /* Item da Direita: Bolinha vai para a esquerda extrema */
             .timeline-item.right .timeline-dot {
                 left: -12px;
                 right: auto;
@@ -379,8 +381,7 @@
             position: fixed;
             bottom: 30px;
             right: 30px;
-            background-color: var(--accent-color); /* Verde Marca */
-            color: #000;
+            background-color: var(--accent-color);
             color: #ffffff; 
             background-color: #25D366; /* Verde Oficial WhatsApp */
             width: 60px;
